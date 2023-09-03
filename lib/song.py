@@ -25,12 +25,16 @@ class Song:
 
         CURSOR.execute(sql, (self.name, self.album))
         
+    @classmethod
+    def create(cls, name, album):
+        song = Song(name, album)
+        song.save()
+        return song
+
 Song.create_table()
 
-hello = Song("Hello", "25")
-hello.save()
-
-despacito = Song("Despacito", "Vida")
-despacito.save()
-
-Song.save(hello)
+song = Song.create("Hello", "25")
+print(song.name)
+# => "Hello"
+print(song.album)
+# => "25"
